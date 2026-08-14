@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SELF{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a href="{{ url_for('main.index') }}" class="brand">SELF</a>
+    <nav class="main-nav">
+      {% for s in ['study','explore','learn','flourish'] %}
+        <a href="{{ url_for('sections.section_view', section_slug=s) }}" class="nav-letter nav-letter--{{ s }}">{{ s[0]|upper }}<span>{{ s|capitalize }}</span></a>
+      {% endfor %}
+      <a href="{{ url_for('main.about') }}" class="nav-about">О проекте</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-line">Study to Explore. Explore to Learn. Learn to Flourish.</div>
+    <div class="footer-sub">Учись, чтобы исследовать. Исследуй, чтобы понимать. Понимай, чтобы процветать.</div>
+    <a href="{{ url_for('main.about') }}" class="footer-link">Контакты</a>
+  </footer>
+
+</body>
+</html>

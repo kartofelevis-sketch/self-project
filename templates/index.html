@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}SELF — Study. Explore. Learn. Flourish.{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">философия проекта</p>
+    <h1>Study to Explore.<br>Explore to Learn.<br>Learn to Flourish.</h1>
+    <p class="hero-sub">Учись, чтобы исследовать. Исследуй, чтобы понимать. Понимай, чтобы процветать.</p>
+  </div>
+
+  <div class="hero-diagram">
+    <div class="orb" aria-hidden="true">
+      <div class="orb-glow"></div>
+      <div class="orb-grain"></div>
+      <svg class="orb-mark" viewBox="0 0 200 220">
+  <path d="M100 208 L100 140" stroke-width="26"/>
+  <path d="M100 140 L100 92" stroke-width="19"/>
+  <path d="M100 92 L100 58" stroke-width="13"/>
+  <path d="M100 58 L82 22" stroke-width="10"/>
+  <path d="M100 58 L121 20" stroke-width="10"/>
+  <path d="M90 40 L73 27" stroke-width="7"/>
+  <path d="M111 37 L129 44" stroke-width="7"/>
+  <path d="M100 122 L55 97" stroke-width="15"/>
+  <path d="M64 101 L37 79" stroke-width="9"/>
+  <path d="M60 109 L31 119" stroke-width="9"/>
+  <path d="M100 122 L148 93" stroke-width="15"/>
+  <path d="M138 98 L165 77" stroke-width="9"/>
+  <path d="M140 106 L169 118" stroke-width="9"/>
+  <path d="M100 157 L61 176" stroke-width="13"/>
+  <path d="M75 166 L56 190" stroke-width="8"/>
+  <path d="M72 161 L46 149" stroke-width="8"/>
+  <path d="M100 157 L141 173" stroke-width="13"/>
+  <path d="M127 163 L149 188" stroke-width="8"/>
+  <path d="M129 159 L156 146" stroke-width="8"/>
+</svg>
+      <svg class="orb-mark" viewBox="0 0 191.5 200">
+  <path d="M78.2 5.7 L75.3 10.5 L86.2 37.5 L64.4 30.1 L59.6 34.0 L89.7 48.2 L88.6 95.6 L55.2 67.2 L41.7 30.3 L35.8 34.5 L43.7 59.6 L24.4 49.8 L20.3 54.4 L48.2 72.0 L83.0 106.1 L87.6 115.9 L86.7 136.7 L62.7 122.1 L52.2 90.2 L47.8 93.7 L52.4 115.9 L38.2 106.1 L15.7 78.4 L13.7 83.0 L29.9 106.1 L8.3 104.4 L5.7 108.3 L34.7 115.1 L48.2 124.5 L21.2 135.6 L20.7 142.1 L56.8 131.0 L79.9 148.0 L83.6 155.9 L79.9 194.1 L108.7 194.1 L105.0 160.9 L107.9 143.5 L127.7 131.2 L165.5 143.5 L166.6 136.7 L138.4 125.1 L157.4 114.6 L183.4 111.1 L185.6 106.8 L161.6 105.9 L177.1 82.3 L172.7 77.3 L153.1 105.2 L134.7 115.3 L138.9 91.3 L134.7 87.3 L124.7 119.2 L101.7 129.3 L99.8 102.8 L106.8 89.5 L132.3 70.1 L169.7 52.2 L165.5 48.7 L140.0 57.4 L147.6 28.4 L142.4 24.2 L129.9 60.9 L99.1 80.8 L98.9 46.5 L115.5 16.4 L108.7 15.5 L95.0 38.0 L82.5 7.2 Z"/>
+</svg>
+    </div>
+    <p class="orb-caption">study — explore — learn — flourish</p>
+  </div>
+</section>
+
+<section class="intro">
+  <h2>Что такое SELF?</h2>
+  <p>SELF — это образовательный проект, объединяющий закрытое сообщество и открытую, бесплатную базу знаний, доступную на этом сайте.</p>
+  <p>На этом сайте вы найдёте материалы и инструменты для эффективного обучения, а в сообществе, которое я, Ульяна Черо, веду лично, сможете применять их на практике, делиться результатами, получать обратную связь, находить единомышленников и поддержку на пути к своим целям.<br>
+  <a href="https://t.me/communityself" target="_blank" rel="noopener">Узнать больше и присоединиться здесь</a></p>
+  <p>Я создала SELF, потому что уверена: образование не должно ограничиваться школьными уроками, онлайн школами или репетиторами. Настоящее обучение начинается тогда, когда человек учится самостоятельно искать ответы, критически мыслить, применять знания на практике и непрерывно развиваться. Я считаю, что именно это является ключом к развитию самого важного навыка в образовании — самообучению.</p>
+  <p>Я определила 4 принципа «SELF», которые помогают последовательно осваивать и реализовывать навык самообучения. О них вы можете узнать ниже.</p>
+</section>
+
+<section class="pillars">
+  {% for s in sections %}
+  <a href="{{ url_for('sections.section_view', section_slug=s.slug) }}" class="pillar-card pillar-card--{{ s.slug }}">
+    <span class="pillar-letter">{{ s.name[0] }}</span>
+    <h2>{{ s.name }}</h2>
+    <p class="pillar-tagline">{{ s.tagline }}</p>
+    <p class="pillar-desc">{{ s.description }}</p>
+    <span class="pillar-arrow">→</span>
+  </a>
+  {% endfor %}
+</section>
+
+{% if recent_posts %}
+<section class="recent">
+  <p class="eyebrow">свежее</p>
+  <div class="recent-grid">
+    {% for post in recent_posts %}
+    <a href="{{ url_for('sections.post_view', post_slug=post.slug) }}" class="recent-card">
+      <span class="recent-section recent-section--{{ post.section.slug }}">{{ post.section.name }}</span>
+      <h3>{{ post.title }}</h3>
+      {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

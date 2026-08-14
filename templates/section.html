@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ section.name }} — SELF{% endblock %}
+
+{% block content %}
+<section class="section-hero section-hero--{{ section.slug }}">
+  <p class="eyebrow">{{ section.slug }}</p>
+  <h1>{{ section.name }}</h1>
+  <p class="section-tagline">{{ section.tagline }}</p>
+  {% if section.description %}<p class="section-desc">{{ section.description }}</p>{% endif %}
+</section>
+
+<div class="section-body">
+  <aside class="subsection-nav">
+    <a href="{{ url_for('sections.section_view', section_slug=section.slug) }}"
+       class="subsection-link {{ 'is-active' if not active_subsection }}">Все темы</a>
+    {% for sub in section.subsections %}
+      <a href="{{ url_for('sections.subsection_view', section_slug=section.slug, subsection_slug=sub.slug) }}"
+         class="subsection-link {{ 'is-active' if active_subsection and active_subsection.id == sub.id }}">{{ sub.name }}</a>
+    {% endfor %}
+  </aside>
+
+  <div class="post-list">
+    {% if posts %}
+      {% for post in posts %}
+      <a href="{{ url_for('sections.post_view', post_slug=post.slug) }}" class="post-card post-card--{{ section.slug }}">
+        <span class="post-card-sub">{{ post.subsection.name }}</span>
+        <h2>{{ post.title }}</h2>
+        {% if post.summary %}<p>{{ post.summary }}</p>{% endif %}
+        <time>{{ post.published_at.strftime('%d.%m.%Y') }}</time>
+      </a>
+      {% endfor %}
+    {% else %}
+      <p class="empty-state">Здесь пока пусто — материалы скоро появятся.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
