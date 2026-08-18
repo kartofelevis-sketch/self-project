@@ -58,6 +58,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   position: relative;
+  overflow-x: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -387,22 +388,31 @@ a:where(:not([class])):hover { text-decoration-color: var(--accent); }
   padding: clamp(2rem, 5vw, 3.5rem) clamp(1.2rem, 4vw, 3rem) 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  overflow: hidden;
 }
+/* The container above is capped at 1200px and centered, so on wide screens
+   there's empty canvas between its own right edge and the real edge of the
+   browser window. right/top here are measured from THIS box, not the
+   viewport вЂ” so instead of `right: 0`, we compute the extra distance out to
+   100vw with calc() and push the blob that far past the container's own
+   edge. That's what actually lands it flush against the screen, regardless
+   of how wide the window is. */
 .section-hero::before {
   content: "";
   position: absolute;
-  width: 420px; height: 420px;
-  right: -140px; top: -160px;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.55;
+  top: 0;
+  bottom: 0;
+  right: calc(-1 * (100vw - 100%) / 2);
+  width: 640px;
+  max-width: 60vw;
+  background: radial-gradient(circle 480px at 100% 0%, var(--hero-blob) 0%, transparent 72%);
+  opacity: 0.6;
   z-index: 0;
+  pointer-events: none;
 }
-.section-hero--study::before { background: var(--study); }
-.section-hero--explore::before { background: var(--explore); }
-.section-hero--learn::before { background: var(--learn); }
-.section-hero--flourish::before { background: var(--flourish); }
+.section-hero--study { --hero-blob: var(--study); }
+.section-hero--explore { --hero-blob: var(--explore); }
+.section-hero--learn { --hero-blob: var(--learn); }
+.section-hero--flourish { --hero-blob: var(--flourish); }
 
 .section-hero h1, .section-tagline, .section-desc, .section-hero .eyebrow { position: relative; z-index: 1; }
 
