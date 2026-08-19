@@ -663,39 +663,4 @@ a:where(:not([class])):hover { text-decoration-color: var(--accent); }
   .nav-letter span { display: none; }
   .post-content table { font-size: 0.86rem; }
 }
-
-@media (max-width: 520px) {
-  .section-hero {
-    overflow: hidden;
-  }
-
-  .section-hero::before {
-    content: "";
-    position: absolute;
-
-    width: 330px;
-    height: 330px;
-
-    top: -80px;
-    right: -150px;
-    bottom: auto;
-
-    max-width: none;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-      circle at 45% 45%,
-      var(--hero-blob) 0%,
-      color-mix(in srgb, var(--hero-blob) 45%, transparent) 30%,
-      transparent 72%
-    );
-
-    opacity: 0.38;
-    filter: blur(22px);
-
-    transform: rotate(-12deg);
-    pointer-events: none;
-    z-index: 0;
-  }
 }
