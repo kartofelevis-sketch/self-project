@@ -404,8 +404,9 @@ a:where(:not([class])):hover { text-decoration-color: var(--accent); }
   right: calc(-1 * (100vw - 100%) / 2);
   width: 640px;
   max-width: 60vw;
-  background: radial-gradient(circle 480px at 100% 0%, var(--hero-blob) 0%, transparent 72%);
-  opacity: 0.6;
+  background: radial-gradient(circle 520px at 100% 0%, color-mix(in srgb, var(--hero-blob) 28%, transparent) 0%, transparent 70%);
+  opacity: 0.9;
+  filter: blur(40px);
   z-index: 0;
   pointer-events: none;
 }
