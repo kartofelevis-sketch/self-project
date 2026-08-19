@@ -663,3 +663,25 @@ a:where(:not([class])):hover { text-decoration-color: var(--accent); }
   .nav-letter span { display: none; }
   .post-content table { font-size: 0.86rem; }
 }
+
+@media (max-width: 520px) {
+  .section-hero::before {
+    width: 260px;
+    height: 260px;
+    right: -130px;
+    top: -70px;
+    bottom: auto;
+
+    max-width: none;
+
+    background: radial-gradient(
+      circle at center,
+      var(--hero-blob) 0%,
+      transparent 70%
+    );
+
+    opacity: 0.28;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+}
