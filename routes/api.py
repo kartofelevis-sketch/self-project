@@ -80,7 +80,7 @@ def create_subsection():
 @require_bot_key
 
 
-@bp.route("/posts", methods=["GET"])
+@bp.route("/posts", methods=["GET"], strict_slashes=False)
 @require_bot_key
 def list_posts():
     """
