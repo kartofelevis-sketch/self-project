@@ -76,10 +76,6 @@ def create_subsection():
     return jsonify({"id": subsection.id, "slug": subsection.slug, "name": subsection.name}), 201
 
 
-@bp.route("/posts", methods=["POST"])
-@require_bot_key
-
-
 @bp.route("/posts", methods=["GET"], strict_slashes=False)
 @require_bot_key
 def list_posts():
@@ -111,7 +107,8 @@ def list_posts():
     ])
 
 
-
+@bp.route("/posts", methods=["POST"], strict_slashes=False)
+@require_bot_key
 def create_post():
     """
     Ожидаемое тело запроса от бота:
