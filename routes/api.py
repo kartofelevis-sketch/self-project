@@ -76,7 +76,7 @@ def create_subsection():
     return jsonify({"id": subsection.id, "slug": subsection.slug, "name": subsection.name}), 201
 
 
-@bp.route("/posts", methods=["GET"], strict_slashes=False)
+@bp.route("/posts/", methods=["GET"], strict_slashes=False)
 @require_bot_key
 def list_posts():
     """
