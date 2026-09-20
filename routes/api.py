@@ -78,6 +78,40 @@ def create_subsection():
 
 @bp.route("/posts", methods=["POST"])
 @require_bot_key
+
+
+@bp.route("/posts", methods=["GET"])
+@require_bot_key
+def list_posts():
+    """
+    Список последних постов — нужен боту, чтобы показать, что можно
+    отредактировать/удалить. ?limit=N (по умолчанию 20, максимум 50).
+    """
+    try:
+        limit = min(int(request.args.get("limit", 20)), 50)
+    except ValueError:
+        limit = 20
+
+    posts = (
+        Post.query.order_by(Post.published_at.desc(), Post.id.desc())
+        .limit(limit)
+        .all()
+    )
+    return jsonify([
+        {
+            "id": p.id,
+            "title": p.title,
+            "slug": p.slug,
+            "section_name": p.section.name,
+            "subsection_name": p.subsection.name,
+            "published": p.published,
+            "published_at": p.published_at.isoformat() if p.published_at else None,
+        }
+        for p in posts
+    ])
+
+
+
 def create_post():
     """
     Ожидаемое тело запроса от бота:
